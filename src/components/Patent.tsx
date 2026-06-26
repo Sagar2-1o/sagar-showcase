@@ -37,7 +37,7 @@ const patents = [
 
 export default function Patent() {
   return (
-    <section id="patent" className="py-16 md:py-20 px-6 bg-[#050505]">
+    <section id="patent" className="py-12 md:py-20 px-6 bg-[#050505]">
       <div className="max-w-[920px] mx-auto">
         {/* Section Title */}
         <motion.h2
@@ -45,13 +45,13 @@ export default function Patent() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-3xl md:text-4xl font-bold text-white mb-10 tracking-tight"
+          className="text-[28px] md:text-4xl font-bold text-white mb-8 md:mb-10 tracking-tight"
         >
           Patents
         </motion.h2>
 
-        {/* Patents Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Patents Grid — single column on mobile, multi-column on larger screens */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {patents.map((pat, idx) => (
             <motion.div
               key={idx}
@@ -62,11 +62,11 @@ export default function Patent() {
               className="h-full"
             >
               <GlowCard
-                className="p-6 hover:-translate-y-1 hover:shadow-[0_12px_35px_rgba(0,0,0,0.5)] transition-all duration-300 flex flex-col h-full bg-[#111] border-[#222]"
+                className="p-5 md:p-6 hover:-translate-y-1 hover:shadow-[0_12px_35px_rgba(0,0,0,0.5)] transition-all duration-300 flex flex-col h-full bg-[#111] border-[#222]"
                 glowColor="rgba(0, 229, 204, 0.04)"
               >
                 {/* Image Thumbnail */}
-                <div className="w-full h-[150px] overflow-hidden rounded-lg mb-4 bg-[#161616] border border-[#1e1e1e] relative">
+                <div className="w-full h-[160px] md:h-[150px] overflow-hidden rounded-lg mb-4 bg-[#161616] border border-[#1e1e1e] relative">
                   <img
                     src={pat.image.src}
                     alt={pat.title}
@@ -77,26 +77,26 @@ export default function Patent() {
 
                 {/* Status Badge & Year */}
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold tracking-wider uppercase text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 rounded-full px-2.5 py-0.5">
-                    <BadgeCheck size={10} className="stroke-[2.5]" />
+                  <span className="inline-flex items-center gap-1 text-[11px] md:text-[10px] font-semibold tracking-wider uppercase text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 rounded-full px-3 md:px-2.5 py-1 md:py-0.5">
+                    <BadgeCheck size={12} className="stroke-[2.5]" />
                     {pat.status}
                   </span>
                   <span className="text-[11px] text-[#555]">•</span>
-                  <span className="text-[11px] text-[#666] font-medium">{pat.year}</span>
+                  <span className="text-[12px] md:text-[11px] text-[#666] font-medium">{pat.year}</span>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-[16px] font-bold text-white mb-2 leading-tight">
+                <h3 className="text-[17px] md:text-[16px] font-bold text-white mb-2.5 md:mb-2 leading-tight">
                   {pat.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-[13px] text-[#888] leading-relaxed mb-4 flex-1">
+                <p className="text-[14px] md:text-[13px] text-[#888] leading-relaxed mb-4 flex-1">
                   {pat.description}
                 </p>
 
                 {/* Filed Location */}
-                <p className="text-[11px] text-[#555] font-mono leading-relaxed mt-2 border-t border-[#1a1a1a] pt-3">
+                <p className="text-[12px] md:text-[11px] text-[#555] font-mono leading-relaxed mt-2 border-t border-[#1a1a1a] pt-3">
                   Filed at CBS • CGC Landran • 2026
                 </p>
               </GlowCard>

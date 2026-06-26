@@ -55,9 +55,9 @@ const row2Skills: Skill[] = [
 function SkillPill({ skill }: { skill: Skill }) {
   const Icon = skill.icon;
   return (
-    <div className="flex items-center gap-3 bg-[#111] border border-[#222] rounded-full px-5 py-3 shrink-0 select-none hover:border-[#333] transition-colors duration-200">
+    <div className="flex items-center gap-2.5 md:gap-3 bg-[#111] border border-[#222] rounded-full px-4 md:px-5 min-h-[44px] py-2.5 md:py-3 shrink-0 select-none hover:border-[#333] transition-colors duration-200">
       <Icon size={18} style={{ color: skill.color }} className="shrink-0" />
-      <span className="text-[13.5px] font-medium text-[#ccc] whitespace-nowrap">
+      <span className="text-[13px] md:text-[13.5px] font-medium text-[#ccc] whitespace-nowrap">
         {skill.name}
       </span>
     </div>
@@ -77,8 +77,8 @@ function MarqueeRow({
     direction === "left" ? "animate-marquee-left" : "animate-marquee-right";
 
   return (
-    <div className="flex gap-4 w-max">
-      <div className={`flex gap-4 ${animClass}`}>
+    <div className="flex gap-3 md:gap-4 w-max">
+      <div className={`flex gap-3 md:gap-4 ${animClass}`}>
         {items.map((skill, i) => (
           <SkillPill key={`${skill.name}-${i}`} skill={skill} />
         ))}
@@ -89,17 +89,17 @@ function MarqueeRow({
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-16 md:py-20 px-0">
+    <section id="skills" className="py-12 md:py-20 px-0">
 
       {/* Marquee Container with edge fades */}
       <div className="relative overflow-hidden">
         {/* Left fade */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-40 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
         {/* Right fade */}
-        <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-40 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
 
         {/* Row 1: Left to Right */}
-        <div className="mb-4 overflow-hidden">
+        <div className="mb-3 md:mb-4 overflow-hidden">
           <MarqueeRow skills={row1Skills} direction="right" />
         </div>
 

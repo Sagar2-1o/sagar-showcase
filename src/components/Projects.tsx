@@ -142,7 +142,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="relative py-24 px-6 overflow-hidden bg-[#0a0a14]">
+    <section id="projects" className="relative py-16 md:py-24 px-6 overflow-hidden bg-[#0a0a14]">
       {/* Subtle background glow */}
       <div 
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none z-0"
@@ -158,13 +158,13 @@ export default function Projects() {
       <div className="max-w-[920px] mx-auto relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6 mb-8 md:mb-12">
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="text-4xl md:text-5xl font-extrabold text-white tracking-tight"
+            className="text-[28px] md:text-5xl font-extrabold text-white tracking-tight"
           >
             Projects
           </motion.h2>
@@ -177,15 +177,19 @@ export default function Projects() {
                 <button
                   key={filter}
                   onClick={() => setActiveFilter(filter)}
-                  className={`relative px-4 py-2 text-xs md:text-sm font-medium tracking-wide uppercase transition-colors duration-300 ${
-                    isActive ? "text-[#00E5CC]" : "text-[#555] hover:text-[#888]"
-                  }`}
+                  className={`relative transition-all duration-300 flex items-center justify-center
+                             h-[44px] rounded-full px-5 text-[14px] font-medium border
+                             md:h-auto md:rounded-none md:px-4 md:py-2 md:text-xs md:text-sm md:font-medium md:tracking-wide md:uppercase md:border-0
+                             ${isActive 
+                               ? "text-[#00E5CC] border-[#00E5CC]/30 bg-[#00E5CC]/5 md:bg-transparent md:border-0" 
+                               : "text-[#555] hover:text-[#888] border-[#222] bg-[#111]/45 md:bg-transparent md:border-0"
+                             }`}
                 >
                   {filter}
                   {isActive && (
                     <motion.div
                       layoutId="activeProjectFilter"
-                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#00E5CC]"
+                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#00E5CC] hidden md:block"
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
                   )}
@@ -200,7 +204,11 @@ export default function Projects() {
           <div 
             ref={containerRef}
             onScroll={handleScroll}
-            className="w-full flex gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory px-[12.5%] md:px-[115px] py-4 scroll-smooth"
+            className="w-full flex gap-4 md:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory px-0 md:px-[115px] py-4 scroll-smooth"
+            style={{
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
           >
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project, idx) => (
@@ -211,15 +219,15 @@ export default function Projects() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4 }}
-                  className="shrink-0 w-[75%] md:w-[690px] snap-center"
+                  className="shrink-0 w-full md:w-[690px] snap-center"
                 >
                   <GlowCard 
-                    className="h-[450px] bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] hover:border-[#00E5CC]/40 transition-all duration-500 overflow-hidden group rounded-2xl relative backdrop-blur-md flex flex-col justify-between p-5 md:p-6"
+                    className="h-auto md:h-[450px] bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] hover:border-[#00E5CC]/40 transition-all duration-500 overflow-hidden group rounded-2xl relative backdrop-blur-md flex flex-col justify-between p-4 md:p-6"
                     glowColor="rgba(0, 229, 204, 0.06)"
                   >
                     {/* Large Faded Project Number */}
                     <div 
-                      className="absolute top-4 right-6 text-[120px] font-extrabold leading-none select-none pointer-events-none tracking-tighter z-0"
+                      className="absolute top-4 right-4 md:right-6 text-[80px] md:text-[120px] font-extrabold leading-none select-none pointer-events-none tracking-tighter z-0"
                       style={{ color: "rgba(255, 255, 255, 0.06)" }}
                     >
                       {String(idx + 1).padStart(2, '0')}
@@ -232,8 +240,10 @@ export default function Projects() {
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-9 h-9 rounded-lg bg-[rgba(255,255,255,0.05)] backdrop-blur-md border border-[rgba(255,255,255,0.1)] hover:border-[#00E5CC]/50 text-[#888] hover:text-white flex items-center justify-center transition-all duration-300 transform active:scale-95 mb-[16px]"
+                        className="flex items-center justify-center gap-2 bg-[rgba(255,255,255,0.05)] backdrop-blur-md border border-[rgba(255,255,255,0.1)] hover:border-[#00E5CC]/50 text-[#888] hover:text-white transition-all duration-300 transform active:scale-95 mb-3 md:mb-[16px]
+                                   w-full md:w-auto h-[44px] md:h-9 rounded-full md:rounded-lg px-5 md:px-3 text-[14px] md:text-xs font-semibold"
                       >
+                        <span>View Project</span>
                         <ArrowUpRight size={16} />
                       </a>
                     </div>
@@ -243,19 +253,19 @@ export default function Projects() {
                       <span className="inline-block text-[10px] font-mono font-semibold tracking-widest text-[#00E5CC] bg-[#00E5CC]/10 border border-[#00E5CC]/25 rounded-md px-2 py-0.5 mb-[6px] uppercase">
                         {project.tech}
                       </span>
-                      <h3 className="text-[28px] font-bold text-white mb-[10px] leading-tight tracking-tight">
+                      <h3 className="text-[22px] md:text-[28px] font-bold text-white mb-2 md:mb-[10px] leading-tight tracking-tight">
                         {project.title}
                       </h3>
-                      <p className="text-[12px] text-[#bbb] leading-relaxed line-clamp-1 max-w-[520px] mb-0">
+                      <p className="text-[12px] text-[#bbb] leading-relaxed line-clamp-2 md:line-clamp-1 max-w-[520px] mb-0">
                         {project.description}
                       </p>
                     </div>
 
                     {/* Bottom Ticker Area */}
-                    <div className="w-full relative z-10 mt-6 pt-2">
+                    <div className="w-full relative z-10 mt-4 md:mt-6 pt-2">
                       {project.screenshots && project.screenshots.length > 0 ? (
                         <div 
-                          className="w-full overflow-hidden h-[280px]"
+                          className="w-full overflow-hidden h-[200px] md:h-[280px]"
                           style={{
                             maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
                             WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)'
@@ -268,8 +278,7 @@ export default function Projects() {
                                 src={src}
                                 alt={`${project.title} Screenshot`}
                                 loading="lazy"
-                                className="h-[280px] w-auto rounded-[8px] shadow-md mx-2 object-contain"
-                                style={{ height: "280px", borderRadius: "8px" }}
+                                className="h-[200px] md:h-[280px] w-auto rounded-[8px] shadow-md mx-1.5 md:mx-2 object-contain"
                               />
                             ))}
                             {project.screenshots.map((src, i) => (
@@ -278,14 +287,13 @@ export default function Projects() {
                                 src={src}
                                 alt={`${project.title} Screenshot Duplicate`}
                                 loading="lazy"
-                                className="h-[280px] w-auto rounded-[8px] shadow-md mx-2 object-contain"
-                                style={{ height: "280px", borderRadius: "8px" }}
+                                className="h-[200px] md:h-[280px] w-auto rounded-[8px] shadow-md mx-1.5 md:mx-2 object-contain"
                               />
                             ))}
                           </div>
                         </div>
                       ) : (
-                        <div className="h-[280px] w-full border border-dashed border-white/5 rounded-[8px] flex items-center justify-center bg-white/[0.01]">
+                        <div className="h-[200px] md:h-[280px] w-full border border-dashed border-white/5 rounded-[8px] flex items-center justify-center bg-white/[0.01]">
                           <span className="text-[11px] font-mono text-white/20 select-none">
                             Preview gallery coming soon
                           </span>
@@ -308,8 +316,8 @@ export default function Projects() {
 
         {/* Bottom Pagination & Next Project Button */}
         {filteredProjects.length > 0 && (
-          <div className="flex items-center justify-between mt-8 pt-4 border-t border-[#111]">
-            <div className="text-[11px] font-mono text-[#444] tracking-widest uppercase select-none">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 mt-6 md:mt-8 pt-4 border-t border-[#111]">
+            <div className="text-[11px] font-mono text-[#444] tracking-widest uppercase select-none hidden md:block">
               Project Showcase
             </div>
 
@@ -319,9 +327,12 @@ export default function Projects() {
                 <button
                   key={idx}
                   onClick={() => scrollToIndex(idx)}
-                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                  className={`h-2.5 rounded-full transition-all duration-300 min-h-[44px] flex items-center ${
                     currentIndex === idx ? "w-6 bg-[#00E5CC]" : "w-2.5 bg-[#222] hover:bg-[#444]"
                   }`}
+                  style={{
+                    height: "10px",
+                  }}
                   aria-label={`Go to project ${idx + 1}`}
                 />
               ))}
@@ -330,7 +341,9 @@ export default function Projects() {
             {/* Next Project Trigger */}
             <button
               onClick={handleNext}
-              className="flex items-center gap-1.5 text-[13px] font-semibold text-white hover:text-[#00E5CC] transition-colors group"
+              className="flex items-center justify-center gap-1.5 transition-all duration-300 group
+                         h-[44px] rounded-full px-5 text-[14px] font-semibold bg-[#111] border border-[#222] text-[#888] hover:text-[#00E5CC] hover:border-[#00E5CC]/30
+                         md:h-auto md:rounded-none md:p-0 md:bg-transparent md:border-0 md:text-white"
             >
               Next Project
               <ChevronRight size={15} className="group-hover:translate-x-0.5 transition-transform" />

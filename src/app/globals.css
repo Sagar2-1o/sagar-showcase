@@ -25,6 +25,7 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
+    overflow-x: hidden;
   }
 
   body {
@@ -33,6 +34,7 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   ::selection {
@@ -55,6 +57,23 @@
 
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
+  }
+
+  /* Global focus outline reset */
+  *:focus,
+  *:focus-visible,
+  button:focus,
+  button:focus-visible,
+  a:focus,
+  a:focus-visible,
+  input:focus,
+  input:focus-visible,
+  textarea:focus,
+  textarea:focus-visible,
+  [role="button"]:focus,
+  [role="button"]:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
   }
 }
 
@@ -91,3 +110,14 @@
   animation-timing-function: linear;
 }
 
+/* ═══════════ MOBILE RESPONSIVE OVERRIDES (<768px) ═══════════ */
+@media (max-width: 767px) {
+  /* Hide horizontal scrollbar artifacts */
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

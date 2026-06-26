@@ -84,19 +84,41 @@ export default function Achievements() {
   }, [goToNext, activeIndex]); // activeIndex in deps resets timer on manual click
 
   return (
-    <section id="achievements" className="py-16 md:py-20 px-6">
+    <section id="achievements" className="py-12 md:py-20 px-6">
       <div className="max-w-[920px] mx-auto">
         {/* Section Title */}
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-14 tracking-tight">
+        <h2 className="text-[28px] md:text-4xl font-bold text-white mb-10 md:mb-14 tracking-tight">
           Things I&apos;m Proud Of
         </h2>
 
-        {/* Three-Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        {/* Mobile Layout: stacked vertically */}
+        {/* Desktop Layout: Three-Column Grid */}
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-12 items-stretch lg:items-center">
           
-          {/* Column 1: Narrow Dot Navigation (lg:col-span-1) */}
-          <div className="lg:col-span-1 flex justify-start lg:justify-center items-center">
-            <div className="h-[240px] w-[1px] bg-[#222] relative flex flex-col justify-between items-center py-1">
+          {/* Dots Navigation — horizontal row on mobile, vertical on desktop */}
+          <div className="lg:col-span-1 flex justify-center lg:justify-center items-center order-1 lg:order-none">
+            {/* Mobile: horizontal dots */}
+            <div className="flex lg:hidden gap-2 items-center">
+              {achievements.map((_, idx) => {
+                const isActive = activeIndex === idx;
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveIndex(idx)}
+                    className={`relative z-10 w-3 h-3 min-w-[44px] min-h-[44px] flex items-center justify-center transition-all duration-300`}
+                    aria-label={`Go to item ${idx + 1}`}
+                  >
+                    <span className={`block w-2.5 h-2.5 rounded-full border transition-all duration-300 ${
+                      isActive
+                        ? "border-[#00E5CC] bg-[#00E5CC] scale-110"
+                        : "border-[#444] bg-[#0a0a0a] hover:border-[#666]"
+                    }`} />
+                  </button>
+                );
+              })}
+            </div>
+            {/* Desktop: vertical dots */}
+            <div className="hidden lg:flex h-[240px] w-[1px] bg-[#222] relative flex-col justify-between items-center py-1">
               {achievements.map((_, idx) => {
                 const isActive = activeIndex === idx;
                 return (
@@ -115,8 +137,8 @@ export default function Achievements() {
             </div>
           </div>
 
-          {/* Column 2: Wide Active Item Content (lg:col-span-6) */}
-          <div className="lg:col-span-6 flex flex-col justify-center min-h-[260px]">
+          {/* Title and Description — center on mobile */}
+          <div className="lg:col-span-6 flex flex-col justify-center min-h-[200px] md:min-h-[260px] order-2 lg:order-none">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
@@ -132,12 +154,12 @@ export default function Achievements() {
                 </span>
 
                 {/* Title */}
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight leading-tight">
+                <h3 className="text-xl md:text-3xl font-bold text-white mb-3 md:mb-4 tracking-tight leading-tight">
                   {achievements[activeIndex].title}
                 </h3>
                 
                 {/* Description */}
-                <p className="text-[13.5px] md:text-[14.5px] text-[#888] leading-relaxed mb-6">
+                <p className="text-[13px] md:text-[14.5px] text-[#888] leading-relaxed mb-5 md:mb-6">
                   {achievements[activeIndex].description}
                 </p>
 
@@ -146,7 +168,7 @@ export default function Achievements() {
                   href={achievements[activeIndex].link.href}
                   target={achievements[activeIndex].tech === "Patent" ? undefined : "_blank"}
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[12.5px] font-medium text-[#00E5CC] hover:text-[#33ffeb] transition-colors w-fit"
+                  className="inline-flex items-center gap-1.5 text-[12.5px] font-medium text-[#00E5CC] hover:text-[#33ffeb] transition-colors w-fit min-h-[44px]"
                 >
                   {achievements[activeIndex].link.label}
                   <ExternalLink size={12} className="stroke-[2.5]" />
@@ -155,8 +177,8 @@ export default function Achievements() {
             </AnimatePresence>
           </div>
 
-          {/* Column 3: Single Card Image Placeholder (lg:col-span-5) */}
-          <div className="lg:col-span-5 flex justify-start lg:justify-end items-center">
+          {/* Image Card — full width on mobile, at bottom */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end items-center order-3 lg:order-none w-full">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
@@ -164,11 +186,11 @@ export default function Achievements() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.3 }}
-                className="w-full max-w-[320px] bg-[#111] border border-[#222] rounded-2xl p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col justify-between"
+                className="w-full max-w-full md:max-w-[320px] bg-[#111] border border-[#222] rounded-2xl p-4 md:p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col justify-between"
               >
                 {/* Top: Card Image or Plain Dark Rectangle Image Placeholder */}
                 {achievements[activeIndex].image ? (
-                  <div className="w-full h-[220px] overflow-hidden rounded-xl mb-4 bg-[#161616] border border-[#1e1e1e] relative">
+                  <div className="w-full h-[180px] md:h-[220px] overflow-hidden rounded-xl mb-3 md:mb-4 bg-[#161616] border border-[#1e1e1e] relative">
                     <img
                       src={achievements[activeIndex].image.src}
                       alt={achievements[activeIndex].title}
@@ -177,12 +199,12 @@ export default function Achievements() {
                     />
                   </div>
                 ) : (
-                  <div className="w-full h-[220px] bg-[#161616] border border-[#1e1e1e] rounded-xl mb-4" />
+                  <div className="w-full h-[180px] md:h-[220px] bg-[#161616] border border-[#1e1e1e] rounded-xl mb-3 md:mb-4" />
                 )}
 
                 {/* Bottom: Item Details */}
                 <div>
-                  <h4 className="text-[15px] font-bold text-white mb-1.5 leading-tight">
+                  <h4 className="text-[14px] md:text-[15px] font-bold text-white mb-1.5 leading-tight">
                     {achievements[activeIndex].title}
                   </h4>
                   <span className="text-[10px] font-mono tracking-wider uppercase text-[#00E5CC]">

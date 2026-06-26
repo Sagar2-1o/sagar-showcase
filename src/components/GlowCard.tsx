@@ -9,6 +9,7 @@ interface GlowCardProps {
   glowColor?: string;
   onClick?: () => void;
   style?: React.CSSProperties;
+  innerClassName?: string;
 }
 
 export default function GlowCard({
@@ -17,6 +18,7 @@ export default function GlowCard({
   glowColor = "rgba(59, 130, 246, 0.08)", // subtle blue
   onClick,
   style,
+  innerClassName,
 }: GlowCardProps) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -46,7 +48,7 @@ export default function GlowCard({
           `,
         }}
       />
-      <div className="relative z-10">{children}</div>
+      <div className={`relative z-10 ${innerClassName || ""}`}>{children}</div>
     </div>
   );
 }

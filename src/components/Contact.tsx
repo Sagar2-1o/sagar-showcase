@@ -65,7 +65,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-24 md:py-32 px-6 overflow-hidden bg-black min-h-[700px] flex items-center">
+    <section id="contact" className="relative py-16 md:py-32 px-6 overflow-hidden bg-black min-h-[600px] md:min-h-[700px] flex items-center">
       {/* Dark atmospheric moon/planet background image */}
       <div 
         className="absolute inset-0 z-0 pointer-events-none select-none"
@@ -83,7 +83,7 @@ export default function Contact() {
       <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-[2] pointer-events-none" />
 
       <div className="max-w-[920px] mx-auto w-full relative z-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           
           {/* Left Column: Heading & 3 Stacked Contact Items */}
           <motion.div
@@ -99,12 +99,12 @@ export default function Contact() {
             </span>
             
             {/* Large Bold Heading */}
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-10 tracking-tight leading-tight">
+            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold text-white mb-8 md:mb-10 tracking-tight leading-tight">
               Getting in touch is easy!
             </h2>
 
-            {/* 3 Comfortably Spaced Contact Items */}
-            <div className="flex flex-col gap-5">
+            {/* 3 Comfortably Spaced Contact Items — full width on mobile */}
+            <div className="flex flex-col gap-4 md:gap-5">
               {contacts.map((contact) => {
                 const Icon = contact.icon;
                 return (
@@ -116,17 +116,18 @@ export default function Contact() {
                     className="block group"
                   >
                     <GlowCard
-                      className="flex items-center gap-4 bg-[#0a0a0a]/60 backdrop-blur-md border border-[#1a1a1a] p-5 hover:border-[#00E5CC]/50 transition-all duration-300"
+                      className="bg-[#0a0a0a]/60 backdrop-blur-md border border-[#1a1a1a] p-4 md:p-5 min-h-[56px] hover:border-[#00E5CC]/50 transition-all duration-300 w-full"
+                      innerClassName="flex items-center gap-4"
                       glowColor="rgba(0, 229, 204, 0.04)"
                     >
-                      <div className="w-11 h-11 rounded-lg bg-[#161616]/80 border border-[#222] flex items-center justify-center text-[#666] group-hover:text-[#00E5CC] group-hover:border-[#00E5CC]/25 transition-all duration-300">
-                        <Icon size={18} />
+                      <div className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-lg bg-[#161616]/80 border border-[#222] flex items-center justify-center text-[#666] group-hover:text-[#00E5CC] group-hover:border-[#00E5CC]/25 transition-all duration-300">
+                        <Icon size={20} />
                       </div>
-                      <div>
-                        <p className="text-[13.5px] font-bold text-white mb-0.5">
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[14px] md:text-[13.5px] font-bold text-white mb-0.5">
                           {contact.platform}
                         </p>
-                        <p className="text-[12.5px] text-[#666] group-hover:text-[#999] transition-colors duration-200">
+                        <p className="text-[13px] md:text-[12.5px] text-[#666] group-hover:text-[#999] transition-colors duration-200 truncate">
                           {contact.display}
                         </p>
                       </div>
@@ -145,7 +146,7 @@ export default function Contact() {
             viewport={{ once: true, margin: "-60px" }}
             className="flex justify-center"
           >
-            <div className="w-full max-w-[420px] bg-[#111]/70 backdrop-blur-md border border-[#222] rounded-2xl p-6 md:p-8 shadow-2xl">
+            <div className="w-full max-w-full md:max-w-[420px] bg-[#111]/70 backdrop-blur-md border border-[#222] rounded-2xl p-5 md:p-8 shadow-2xl">
               <h3 className="text-[16px] font-bold text-white mb-1.5 leading-tight">
                 Send a Message
               </h3>
@@ -168,14 +169,14 @@ export default function Contact() {
                     type="text"
                     name="name"
                     placeholder="Your name"
-                    className="bg-[#0a0a0a]/90 border border-[#222] focus:border-[#00E5CC] text-white rounded-lg px-4 py-3 text-sm focus:outline-none transition-colors w-full mb-4 placeholder-[#555]"
+                    className="bg-[#0a0a0a]/90 border border-[#222] focus:border-[#00E5CC] text-white rounded-lg px-4 py-3 text-sm focus:outline-none transition-colors w-full mb-4 placeholder-[#555] min-h-[44px]"
                     required
                   />
                   <input
                     type="email"
                     name="email"
                     placeholder="Your email"
-                    className="bg-[#0a0a0a]/90 border border-[#222] focus:border-[#00E5CC] text-white rounded-lg px-4 py-3 text-sm focus:outline-none transition-colors w-full mb-4 placeholder-[#555]"
+                    className="bg-[#0a0a0a]/90 border border-[#222] focus:border-[#00E5CC] text-white rounded-lg px-4 py-3 text-sm focus:outline-none transition-colors w-full mb-4 placeholder-[#555] min-h-[44px]"
                     required
                   />
                   <textarea
@@ -186,11 +187,11 @@ export default function Contact() {
                     required
                   />
                   
-                  {/* Submit Button */}
+                  {/* Submit Button — full width always */}
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full bg-[#00E5CC] hover:bg-[#2ae8d1] text-black font-bold py-3 px-6 rounded-lg text-[13px] tracking-wide transition-all duration-300 transform active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full bg-[#00E5CC] hover:bg-[#2ae8d1] text-black font-bold py-3.5 md:py-3 px-6 rounded-lg text-[14px] md:text-[13px] tracking-wide transition-all duration-300 transform active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed min-h-[48px]"
                   >
                     {submitting ? "SENDING..." : "Send Message"}
                   </button>
